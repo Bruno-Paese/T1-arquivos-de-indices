@@ -61,17 +61,14 @@ char *sepToken(char linha[], int *i)
 	return str;
 }
 
-int main()
-{
-	FILE *csv, *bin;
+int gerarBin(FILE *csv, int limit) {
+	FILE *bin;
 	App tempApp;
 	char linha[11000];
 	char *campo = NULL;
 	int i, c = 0;
 
-	// csv = fopen("file.csv", "r");
-	csv = fopen("Google-Playstore-Ordered.csv", "r");
-	bin = fopen("file.dat", "w");
+	bin = fopen("temp/file.dat", "w");
 
 	if (!csv || !bin)
 	{
@@ -82,7 +79,7 @@ int main()
 	// Pula cabeçalho
 	fgets(linha, 11000, csv);
 
-	while (fgets(linha, 11000, csv) != NULL && c < LIMIT)
+	while (fgets(linha, 11000, csv) != NULL && c < limit)
 	{
 		linha[strlen(linha) - 1] = '\0';
 
@@ -170,8 +167,18 @@ int main()
 		fwrite(&tempApp, sizeof(App), 1, bin);
 	}
 
-	fclose(csv);
 	fclose(bin);
 
 	return 0;
+}
+
+int main()
+{
+	FILE * csv;
+
+	csv = fopen("file.csv", "r");
+
+
+
+	fclose(csv);
 }
