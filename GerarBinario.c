@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define LIMIT 100
-
 /*
 	Código para gerar arquivo binário com
 	tamanho fixo e já definido em uma struct
@@ -61,29 +59,28 @@ char *sepToken(char linha[], int *i)
 	return str;
 }
 
-int gerarBin(FILE **csv, int limit, char filename[]) {
-	FILE *bin;
+int main()
+{
+	FILE *csv, *bin;
 	App tempApp;
 	char linha[11000];
 	char *campo = NULL;
-	int i, c = 0;
+	int i;
 
-	char completeFilename[] = "temp/";
+	// csv = fopen("file.csv", "r");
+	csv = fopen("Google-Playstore-Ordered.csv", "r");
+	bin = fopen("file.dat", "w");
 
-	strcat(completeFilename, filename);
-
-	bin = fopen(completeFilename, "w");
-
-	if (!(*csv) || !bin)
+	if (!csv || !bin)
 	{
 		printf("Arquivos não encontrados\n");
 		return 1;
 	}
 
 	// Pula cabeçalho
-	fgets(linha, 11000, (*csv);
+	fgets(linha, 11000, csv);
 
-	while (fgets(linha, 11000, (*csv)) != NULL && c < limit)
+	while (fgets(linha, 11000, csv) != NULL)
 	{
 		linha[strlen(linha) - 1] = '\0';
 
@@ -166,24 +163,11 @@ int gerarBin(FILE **csv, int limit, char filename[]) {
 		strcpy(tempApp.scrapedTime, (campo ? campo : ""));
 		free(campo);
 
-		c++;
-
 		fwrite(&tempApp, sizeof(App), 1, bin);
 	}
 
+	fclose(csv);
 	fclose(bin);
 
 	return 0;
-}
-
-int main()
-{
-	FILE * csv;
-
-	csv = fopen("file.csv", "r");
-
-	gerarBin(&csv, 200, "partition.dat");
-
-
-	fclose(csv);
 }
