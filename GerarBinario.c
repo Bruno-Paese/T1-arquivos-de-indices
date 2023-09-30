@@ -61,25 +61,29 @@ char *sepToken(char linha[], int *i)
 	return str;
 }
 
-int gerarBin(FILE *csv, int limit) {
+int gerarBin(FILE **csv, int limit, char filename[]) {
 	FILE *bin;
 	App tempApp;
 	char linha[11000];
 	char *campo = NULL;
 	int i, c = 0;
 
-	bin = fopen("temp/file.dat", "w");
+	char completeFilename[] = "temp/";
 
-	if (!csv || !bin)
+	strcat(completeFilename, filename);
+
+	bin = fopen(completeFilename, "w");
+
+	if (!(*csv) || !bin)
 	{
 		printf("Arquivos não encontrados\n");
 		return 1;
 	}
 
 	// Pula cabeçalho
-	fgets(linha, 11000, csv);
+	fgets(linha, 11000, (*csv);
 
-	while (fgets(linha, 11000, csv) != NULL && c < limit)
+	while (fgets(linha, 11000, (*csv)) != NULL && c < limit)
 	{
 		linha[strlen(linha) - 1] = '\0';
 
@@ -178,6 +182,7 @@ int main()
 
 	csv = fopen("file.csv", "r");
 
+	gerarBin(&csv, 200, "partition.dat");
 
 
 	fclose(csv);
