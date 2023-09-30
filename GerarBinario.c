@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define LIMIT 100
+
 /*
 	Código para gerar arquivo binário com
 	tamanho fixo e já definido em uma struct
@@ -42,7 +44,7 @@ char *sepToken(char linha[], int *i)
 	int j = 0, k = 0;
 
 	(*i)++; // Pula primeira aspas
-	while (linha[*i] != '"' || (linha[*i + 1] != ',' && linha[*i + 1] != '\0'))
+	while (linha[*i] && (linha[*i] != '"' || (linha[*i + 1] != ',' && linha[*i + 1] != '\0')))
 	{		 // Busca final da palavra
 		j++; // Determina tamanho da palavra
 		(*i)++;
@@ -65,7 +67,7 @@ int main()
 	App tempApp;
 	char linha[11000];
 	char *campo = NULL;
-	int i;
+	int i, c = 0;
 
 	// csv = fopen("file.csv", "r");
 	csv = fopen("Google-Playstore-Ordered.csv", "r");
@@ -80,7 +82,7 @@ int main()
 	// Pula cabeçalho
 	fgets(linha, 11000, csv);
 
-	while (fgets(linha, 11000, csv) != NULL)
+	while (fgets(linha, 11000, csv) != NULL && c < LIMIT)
 	{
 		linha[strlen(linha) - 1] = '\0';
 
@@ -162,6 +164,8 @@ int main()
 		campo = sepToken(linha, &i);
 		strcpy(tempApp.scrapedTime, (campo ? campo : ""));
 		free(campo);
+
+		c++;
 
 		fwrite(&tempApp, sizeof(App), 1, bin);
 	}
