@@ -69,7 +69,7 @@ int main()
 
 	// csv = fopen("file.csv", "r");
 	csv = fopen("Google-Playstore-Ordered.csv", "r");
-	bin = fopen("file.dat", "w");
+	bin = fopen("file.dat", "wb");
 
 	if (!csv || !bin)
 	{
