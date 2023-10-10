@@ -27,7 +27,7 @@ int main()
 {
 	int opcao;
 	Indice3 **indice3;
-	char input[50];
+	char input[256];
 	Avl *indice4;
 	App *temp;
 	printf("Gerando índice da avaliação...\n");
@@ -63,13 +63,14 @@ int main()
 			break;
 		case 5:
 			printf("Informe o nome do App:\n");
-			scanf("%s", input);
+			fflush(stdin);
+			gets(input);
 			if (strcmp("", input) == 0)
 				break;
 			temp = buscarPorNomeApp(input, "file.dat", indice4);
 			if (temp != NULL)
 			{
-				printf("%s", temp->name);
+				printf("%s\n", temp->name);
 			}
 			else
 			{
