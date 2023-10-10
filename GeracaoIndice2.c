@@ -220,7 +220,7 @@ int binarySearchIndex2(char nome[50])
 			App a;
 			fread(&a, sizeof(a), 1, dataFile);
 
-			printf("Nome %s - Endereco: %d\n", a.name, aux.address);
+			printf("Nome %s - Endereco: %d\n", a.name, aux.address * sizeof(App));
 
 
 			break;

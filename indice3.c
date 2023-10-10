@@ -59,6 +59,7 @@ int gerarIndice3(Indice3 *indice[], char path[])
 		}
 
 		i++;
+		printf("Registros lidos %d\n", i);
 	}
 
 	fclose(bin);

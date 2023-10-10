@@ -43,7 +43,9 @@ int main()
 		switch (opcao)
 		{
 		case 1:
+			printf("Gerando Indice 1\n");
 			executeIndex1();
+			printf("Gerando Indice 2\n");
 			executeIndex2();
 			break;
 		case 2:
@@ -62,8 +64,8 @@ int main()
 			listarComAvaliacao(input, indice3, FILENAME);
 			break;
 		case 5:
+			gets();
 			printf("Informe o nome do App:\n");
-			fflush(stdin);
 			gets(input);
 			if (strcmp("", input) == 0)
 				break;

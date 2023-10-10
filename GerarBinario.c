@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define LIMIT 10000000000000000
+#define LIMIT 1000000000000000
 
 /*
 	Código para gerar arquivo binário com
