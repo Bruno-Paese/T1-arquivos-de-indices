@@ -14,36 +14,6 @@ struct a
 
 typedef struct a Avl;
 
-struct app
-{
-    char name[256];
-    char id[256];
-    char category[100];
-    char rating[5];
-    int ratingCount;
-    int installs;
-    int minimumInstalls;
-    int maximumInstalls;
-    short free;
-    char price[8];
-    char currency[5];
-    char size[10];
-    char minimumAndroid[20];
-    char devId[256];
-    char devWebsite[256];
-    char devEmail[60];
-    char released[13];
-    char lastUpdated[13];
-    char contentRating[30];
-    char privacyPolicy[10000];
-    short adSupported;
-    short inAppPurchases;
-    short editorsChoice;
-    char scrapedTime[20];
-};
-
-typedef struct app App;
-
 // Retorna a altura ou zero caso o nodo esteja nulo
 int getAltura(Avl *node)
 {
@@ -301,7 +271,6 @@ Avl *gerarIndice4(char path[])
     while (!feof(bin))
     {
         fread(&temp, sizeof(App), 1, bin);
-        printf("%s\n", temp.name);
         inserirValorNaArvore(temp.name, sizeof(App) * i, &indice4, &indice4);
         i++;
     }
@@ -351,16 +320,7 @@ App *buscarPorNomeApp(char *name, char *path, Avl *avl)
     }
 }
 
-void main()
+Avl *executeIndex4()
 {
-    Avl *tempAvl = gerarIndice4("file2.dat");
-    App *temp = buscarPorNomeApp("Good Morning Quotes", "file2.dat", tempAvl);
-    if (temp != NULL)
-    {
-        printf("%s", temp->name);
-    }
-    else
-    {
-        printf("Nome não encontrado!");
-    }
+    return gerarIndice4("file.dat");
 }
