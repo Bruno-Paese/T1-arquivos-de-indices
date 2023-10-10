@@ -19,11 +19,12 @@ int obterPosicaoIndice3(char *rating)
 
 int gerarIndice3(Indice3 *indice[], char path[])
 {
+	Indice3 *header[51];
 	Indice3 *tempIndice;
 	App temp;
 	FILE *bin;
 	bin = fopen(path, "rb");
-	int i;
+	int i, j;
 
 	if (!bin)
 	{
@@ -32,7 +33,10 @@ int gerarIndice3(Indice3 *indice[], char path[])
 	}
 
 	for (i = 0; i < 51; i++)
+	{
 		indice[i] = NULL;
+		header[i] = NULL;
+	}
 
 	i = 0;
 
@@ -42,17 +46,16 @@ int gerarIndice3(Indice3 *indice[], char path[])
 		Indice3 *index = (Indice3 *)malloc(sizeof(Indice3));
 		index->address = i * sizeof(App);
 		index->next = NULL;
-
-		tempIndice = indice[obterPosicaoIndice3(temp.rating)];
-		if (tempIndice != NULL)
+		j = obterPosicaoIndice3(temp.rating);
+		if (header[j] != NULL)
 		{
-			while (tempIndice->next != NULL)
-				tempIndice = tempIndice->next;
-			tempIndice->next = index;
+			header[j]->next = index;
+			header[j] = header[j]->next;
 		}
 		else
 		{
-			indice[obterPosicaoIndice3(temp.rating)] = index;
+			header[j] = index;
+			indice[j] = index;
 		}
 
 		i++;
