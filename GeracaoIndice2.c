@@ -215,8 +215,8 @@ int binarySearchIndex2(char nome[50])
 		{
 			position = mid;
 
-			FILE *dataFile = fopen("./file.dat", 'rb');
-			fseek(dataFile, aux.address, SEEK_SET);
+			FILE *dataFile = fopen("./file.dat", "rb");
+			fseek(dataFile, aux.address * sizeof(App), SEEK_SET);
 			App a;
 			fread(&a, sizeof(a), 1, dataFile);
 
