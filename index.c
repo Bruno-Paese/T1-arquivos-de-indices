@@ -17,8 +17,8 @@ void printMenu()
 	printf("Escolha uma opção:\n");
 	printf("0. Sair\n");
 	printf("1. Gerar Índices\n");
-	printf("2. Buscar app por ID (Índice 1 - exaustivo)\n");
-	printf("3. Buscar app por endereço de email do desenvolvedor (Índice 2 - parcial)\n");
+	printf("2. Buscar app por ID (Índice 1 - parcial)\n");
+	printf("3. Buscar app por endereço de email do desenvolvedor (Índice 2 - exaustivo)\n");
 	printf("4. Buscar app por avaliação (Índice 3 - índice de listas)\n");
 	printf("5. Buscar app por nome (Índice 4 - AVL)\n");
 }
