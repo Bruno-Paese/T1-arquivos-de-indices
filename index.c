@@ -72,7 +72,7 @@ int main()
 			temp = buscarPorNomeApp(input, "file.dat", indice4);
 			if (temp != NULL)
 			{
-				printf("Nome: %s\n", temp->name);
+				printf("AppId: %s\n", temp->id);
 			}
 			else
 			{
