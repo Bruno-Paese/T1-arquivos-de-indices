@@ -4,7 +4,7 @@
 #include <time.h>
 
 #define PARTITION_SIZE 10000
-#define PARTITION_NAME_TEMPLATETE "./index/temp/index-file%d.dat"
+#define PARTITION_NAME_TEMPLATETE "./index-file%d.dat"
 
 /*
 	Esse script cria um indice de todos os e-mails do desenvolvedor
@@ -207,7 +207,7 @@ int binarySearchIndex2(char nome[50])
 
 		int comparisonResult = strcmp(nome, aux.text);
 
-		printf(" %s - Encontrou: %d\n", aux.text, comparisonResult == 0);
+		// printf(" %s - Encontrou: %d\n", aux.text, comparisonResult == 0);
 
 		comps++;
 

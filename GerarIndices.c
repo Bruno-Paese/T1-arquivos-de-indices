@@ -73,7 +73,7 @@ int binarySearchIndex(char id[])
 
 		int comparisonResult = strcmp(id, aux.id);
 
-		printf(" %s - Encontrou: %d\n", aux.id, comparisonResult == 0);
+		// printf(" %s - Encontrou: %d\n", aux.id, comparisonResult == 0);
 
 		comps++;
 
