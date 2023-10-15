@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define LIMIT 1000000000000000
+#define LIMIT 10000000000000000000
 
 /*
 	Código para gerar arquivo binário com
@@ -61,7 +61,7 @@ int main()
 	// Pula cabeçalho
 	fgets(linha, 1000, csv);
 
-	while (fgets(linha, 1000, csv) != NULL && c < LIMIT)
+	while (fgets(linha, 1000, csv) != NULL)
 	{
 		linha[strlen(linha) - 1] = '\0';
 
@@ -69,7 +69,7 @@ int main()
 
 		// Desconsidera linhas finais que são apenas quebras de linha
 		// Desconsidera linhas que tenham interrogação (caracteres chineses) e que tenham o campo nome vazio
-		if (strlen(linha) < 2 || linha[1] == '?' || linha[1] == '"')
+		if (strlen(linha) < 2 || linha[1] == '?')
 			continue;
 
 		campo = sepToken(linha, &i);
