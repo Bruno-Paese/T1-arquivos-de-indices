@@ -27,7 +27,7 @@ int main()
 {
 	int opcao;
 	Indice3 **indice3;
-	char input[256];
+	char input[512];
 	Avl *indice4;
 	App *temp;
 	printf("Gerando índice da avaliação...\n");

@@ -4,7 +4,7 @@
 
 struct idIndex
 {
-	char id[256];
+	char id[512];
 	int address;
 };
 
@@ -47,12 +47,16 @@ int executeIndex1()
 	return 0;
 }
 
-
 int binarySearchIndex(char id[])
 {
 	IdIndex aux;
 
 	FILE *file = fopen("fileIndex.dat", "rb");
+	if (file == NULL)
+	{
+		perror("Error opening index file");
+		return -1; // Return an error code or handle the error as needed
+	}
 
 	int size, comps = 0;
 	size = sizeof(IdIndex);
@@ -73,39 +77,51 @@ int binarySearchIndex(char id[])
 
 		int comparisonResult = strcmp(id, aux.id);
 
+		fread(&aux, size, 1, file);
+		int comparisonResult2 = strcmp(id, aux.id);
+
+		fseek(file, mid * size, SEEK_SET);
+		fread(&aux, size, 1, file);
+
 		// printf(" %s - Encontrou: %d\n", aux.id, comparisonResult == 0);
 
 		comps++;
 
-		if (comparisonResult >= 0)
+		if (comparisonResult >= 0 && comparisonResult2 < 0)
 		{
 			position = mid;
 
 			FILE *dataFile = fopen("./file.dat", "rb");
+			if (dataFile == NULL)
+			{
+				perror("Error opening data file");
+				return -1; // Handle the error as needed
+			}
 
-			for(int i = 0; i < 10; i++) {
+			for (int i = 0; i < 10; i++)
+			{
 				fseek(dataFile, aux.address + (sizeof(App) * i), SEEK_SET);
 				App a;
 				fread(&a, sizeof(App), 1, dataFile);
-				if (strcmp(a.id, id) == 0) {
+				if (strcmp(a.id, id) == 0)
+				{
 					printf("Nome %s \n", a.name);
-					break;
 				}
 			}
 			fclose(dataFile);
+		}
 
-			break;
-		}
-		else if (comparisonResult > 0)
-		{
-			left = mid + 1;
-		}
-		else
+		if (comparisonResult <= 0)
 		{
 			right = mid - 1;
 		}
+		else
+		{
+			left = mid + 1;
+		}
 	}
 
+	fclose(file);
 	return comps;
 }
 
@@ -143,7 +159,7 @@ int binarySearchIndex(char id[])
 // 		if (comparisonResult >= 0)
 // 		{
 // 			position = mid;
-			
+
 // 			FILE *dataFile = fopen("file.dat", 'rb');
 // 			fseek(dataFile, aux.address, SEEK_SET);
 // 			App a;

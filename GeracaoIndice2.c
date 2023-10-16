@@ -12,7 +12,7 @@
 
 typedef struct textIndex
 {
-	char text[50];
+	char text[100];
 	FILE *dataset;
 	int address;
 } TEXT_INDEX;
